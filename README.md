@@ -25,7 +25,7 @@ Other data analysis (performed on this data before) considered also the hiring d
 
 To check the title of each employee about to retire, we need to join two tables: employee and titles.  From employee table we retrieve three columns: `employee number`, `first name` and `last name`. From titles table we need to retrieve: `title`. In addition to these columns, we need to filter out the data based on the birth date so we can include only employees that are in the age of retirement.
 
-![retiring](https://raw.githubusercontent.com/LeidyDoradoM/PewlettHackard_Challenge/main/retiremet_titles.png)
+![retiring](https://raw.githubusercontent.com/LeidyDoradoM/PewlettHackard_Challenge/main/retirement_titles.png)
 Figure 1. Overview of the first rows of Retiring Employee Table
 
 The total of rows in this table is 113,776.  But there are duplicates since some employees have had multiple roles during their time at Pewlett Hackard.  
@@ -75,7 +75,6 @@ GROUP BY aut.title
 ORDER BY count DESC;
 ```
 ![allemp](https://raw.githubusercontent.com/LeidyDoradoM/PewlettHackard_Challenge/main/all_employees_titles.png)
-
 
 - Regarding the mentorship program, there are 1,549 employees that could participate. This is roughly 1.7% of the retiring employees, which is really a low amount of people that could help in reducing the burden of retirement.  Furthermore if we consider that qualified employees are those with plenty of experience such as *Senior Engineer* and *Senior Staff*, the amount of candidates that could mentor the next generation of employees is reduced even more.  This total number of Senior employees could be find if we filter the mentorship-eligibility table by `title` and count its rows.  Below it is the query that gives as result 709 employees.
 
