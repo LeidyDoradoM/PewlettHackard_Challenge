@@ -1,6 +1,6 @@
 # Pewlett Hackard Employee Database
 
-Pewlett Hackard is a large company with thousands of employees that is in the middle of a rapid rate wave of retirements. To prepare for the future, the company begin a data researching for answering two main questions:
+Pewlett Hackard is a large company with thousands of employees that is in the middle of a rapid wave of retirements. To prepare for the future, the company begin a data researching for answering two main questions:
 
  1. Who is going to retire
  2. How many positions will need to be filled.
@@ -18,8 +18,8 @@ To give more support to the Mentorship Program, we need to find the answers to t
 
 ## Results
 
-For our analysis here, we are going to consider only one condition for defining retirement:  employees that were born between `January 1, 1952` and `December 31, 1955`.
-Other data analysis (performed on this data before) considered also the hiring date as an additional condition for retirement.
+For our analysis, we are going to consider only one condition for defining retirement:  employees that were born between `January 1, 1952` and `December 31, 1955`.
+Other data analysis (performed before on this data) considered also the hiring date as an additional condition for retirement.
 
 ### 1. Retiring Employees per Title
 
@@ -60,6 +60,7 @@ Figure 4. Mentorship-Eligibility
 Fisrt we need to create a unique titles table but for the entire universe of employees at Pewlett Hackard  and then create the table for titles. Below there are the two queries and the resulting table that shows the list of employees at Pewlett Hackard by titles:
 
 ```sql
+--create an intermediate table that keep information of unique titles
 SELECT DISTINCT ON (e.emp_no) e.emp_no, e.first_name, e.last_name,
 	t.title, t.from_date, t.to_date INTO all_unique_titles
 	FROM employees as e 
@@ -69,12 +70,16 @@ ORDER BY e.emp_no;
 ```
 
 ```sql
+--counting of employees by title
 SELECT count(aut.title),aut.title 
 FROM all_unique_titles AS aut
 GROUP BY aut.title
 ORDER BY count DESC;
 ```
+
 ![allemp](https://raw.githubusercontent.com/LeidyDoradoM/PewlettHackard_Challenge/main/all_employees_titles.png)
+
+Comparing the numbers between this table and the one in Figure 3, we found that almost the 50% of senior employees are about to retire, approximately the 13% of engineers, the 29% of the staff, and the 20% of the technical roles.
 
 - Regarding the mentorship program, there are 1,549 employees that could participate. This is roughly 1.7% of the retiring employees, which is really a low amount of people that could help in reducing the burden of retirement.  Furthermore if we consider that qualified employees are those with plenty of experience such as *Senior Engineer* and *Senior Staff*, the amount of candidates that could mentor the next generation of employees is reduced even more.  This total number of Senior employees could be find if we filter the mentorship-eligibility table by `title` and count its rows.  Below it is the query that gives as result 709 employees.
 
@@ -83,3 +88,5 @@ SELECT COUNT(*)
 FROM mentorship_eligibility
 WHERE (title IN ('Senior Engineer','Senior Staff'));
 ```
+
+Pewlett Hackard will have a huge burden of vacant positions to fill in in the next years, and given the low amount of people eligible to mentor, the company will face a great deficit. The best they can do is try to mitigate the situation and learn from it so in the future retirement waves do not have this same impact.
